@@ -6,4 +6,4 @@ Welcome to my repository of C++ projects! This repository contains five differen
 
 In this project, I implemented essential graph algorithms using a representation based on an adjacency matrix.
 
-- **Read more:** [Graphs&Algorithms_README](./Task1_DynamicArray/README.md)
+- **Read more:** [Graphs&Algorithms.README](./Task1_DynamicArray/README.md)
