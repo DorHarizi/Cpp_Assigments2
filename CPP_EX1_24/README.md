@@ -1,6 +1,6 @@
 <div dir="rtl" lang="he">
   
-# Graph Algorithms
+# Graph & Algorithms
 
 This project implements a set of graph algorithms using a representation based on an adjacency matrix.
 
