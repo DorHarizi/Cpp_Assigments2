@@ -1,8 +1,7 @@
 #pragma once
 
 #include "Graph.hpp"
-#include <vector> // Make sure this is included
-
+#include <vector> 
 namespace ariel {
     class Algorithms {
     public:
