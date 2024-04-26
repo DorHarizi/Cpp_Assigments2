@@ -1,3 +1,5 @@
+<div dir="rtl" lang="he">
+  
 # Graph Algorithms
 
 This project implements a set of graph algorithms using a representation based on an adjacency matrix.
@@ -27,9 +29,15 @@ This file contains demonstration examples showcasing the usage of the implemente
 ## Usage
 
 To compile and run the demo program:
+
 <div dir='ltr'>
   
-make demo && ./demo
+    make demo && ./demo
+
 
 </div>
+
+</div>
+
+
 
