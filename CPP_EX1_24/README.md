@@ -27,4 +27,9 @@ This file contains demonstration examples showcasing the usage of the implemente
 ## Usage
 
 To compile and run the demo program:
+<div dir='ltr'>
+  
+make demo && ./demo
+
+</div>
 
