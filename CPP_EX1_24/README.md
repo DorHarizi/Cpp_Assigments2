@@ -31,10 +31,15 @@ This file contains demonstration examples showcasing the usage of the implemente
 To compile and run the demo program:
 
 <div dir='ltr'>
-  
     make demo && ./demo
+</div>
 
+To compile and run the test program:
 
+<div dir='ltr'>
+    make test && ./test
+    make valgrind
+    make tidy
 </div>
 
 </div>
