@@ -34,13 +34,7 @@ To compile and run the demo program:
     make demo && ./demo
 </div>
 
-To compile and run the test program:
 
-<div dir='ltr'>
-    make test && ./test
-    make valgrind
-    make tidy
-</div>
 
 </div>
 
