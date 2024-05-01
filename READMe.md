@@ -10,7 +10,7 @@ In this project, I implemented essential graph algorithms using a representation
 
 ## 2. [Graphs&Algorithms](./CPP_EX2_24)
 
-In this project, I expanded the `Graph` class to include operator overloads, allowing arithmetic and logical operations directly on graph objects represented by an adjacency matrix. This enhancement includes operator overloads for addition, subtraction, and comparison of graphs, as well as operations that manipulate graph data, such as incrementing or scaling the adjacency matrix. This approach not only simplifies code that works with graphs but also integrates mathematical concepts typically associated with matrices in linear algebra.
+In this project, I expanded the `Graph` class to include operator overloads, allowing arithmetic and logical operations directly on graph objects represented by an adjacency matrix. 
 
 - **Key Features:**
   - **Operator Overloads:** Implements arithmetic operations for adding and subtracting graphs, comparisons to evaluate graph equality or size, and scalar operations to adjust graph weights.
