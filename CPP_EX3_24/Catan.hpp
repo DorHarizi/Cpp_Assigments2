@@ -25,6 +25,7 @@ namespace ariel {
 
     public:
         Catan(Player& player1, Player& player2, Player& player3);
+
         Board getBoard() const;
         void ChooseStartingPlayer();
         Player& getCurrentPlayer();
