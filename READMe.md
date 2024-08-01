@@ -28,3 +28,14 @@ This project implements the Catan game, focusing on board representation, player
   - **Game Flow:** Utilizes the `Catan` class to control the overall game flow, player turns, and determine the winner.
 
 - **Read more:** [Catan Game README](./CPP_EX3_24/README.md)
+
+## 4. [Trees - STL, Templates, and Iterators](./CPP_EX4_24)
+
+This project focuses on implementing a k-ary tree in C++ with various traversal iterators and a GUI representation. The tree supports different types of keys and allows specification of the maximum number of children per node. 
+
+- **Key Features:**
+  - **Generic Tree Implementation:** Supports keys of any type (e.g., numbers, strings, classes).
+  - **Traversal Iterators:** Includes pre-order, post-order, in-order, BFS, DFS, and heap traversal iterators.
+  - **GUI Representation:** Provides a graphical interface to display the tree structure.
+
+- **Read more:** [Trees - STL, Templates, and Iterators README](./CPP_EX4_24/README.md)

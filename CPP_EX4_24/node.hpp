@@ -1,36 +1,29 @@
 #pragma once
 
 #include <vector>
-#include <memory>
 
 /**
- * @class Node
- * @brief Represents a node in a k-ary tree.
- * @tparam T The type of the value stored in the node.
+ * @brief A class to represent a node in the k-ary tree.
+ * 
+ * @tparam T Type of the data stored in the node.
  */
-template<typename T>
+template <typename T>
 class Node {
 public:
-    T value;  ///< The value stored in the node.
-    std::vector<std::shared_ptr<Node<T>>> children;  ///< The children of the node.
+    T data;  ///< Data stored in the node.
+    std::vector<Node<T>*> children;  ///< Children of the node.
 
     /**
-     * @brief Constructor to initialize the node with a value.
-     * @param val The value to initialize the node with.
+     * @brief Constructor to initialize a node with given value.
+     * @param value Data to be stored in the node.
      */
-    Node(T val) : value(val) {}
+    Node(T value) : data(value) {}
 
     /**
-     * @brief Get the value stored in the node.
-     * @return The value of the node.
+     * @brief Gets the value stored in the node.
+     * @return Value of the node.
      */
-    T get_value() const { return value; }
-
-    /**
-     * @brief Add a child node.
-     * @param child The child node to add.
-     */
-    void add_child(std::shared_ptr<Node<T>> child) {
-        children.push_back(child);
+    T get_value() const {
+        return data;
     }
 };

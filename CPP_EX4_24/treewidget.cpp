@@ -1,50 +1,46 @@
-#include "treewidget.h"
-#include <QVBoxLayout>
+#include "treewidget.hpp"
+#include <QApplication>
+#include <QGraphicsScene>
+#include <QGraphicsTextItem>
 
-TreeWidget::TreeWidget(QWidget *parent)
-    : QWidget(parent) {
-    setupUi();
-    displayTree();
+/**
+ * @brief Constructor to initialize the TreeWidget.
+ * @param parent Parent widget.
+ */
+TreeWidget::TreeWidget(QWidget* parent) : QGraphicsView(parent) {
+    scene = new QGraphicsScene(this);
+    this->setScene(scene);
 }
 
-void TreeWidget::setupUi() {
-    treeWidget = new QTreeWidget(this);
-    treeWidget->setColumnCount(1);
-    treeWidget->setHeaderLabels(QStringList() << "Tree Structure");
-
-    QVBoxLayout *layout = new QVBoxLayout(this);
-    layout->addWidget(treeWidget);
-    setLayout(layout);
-}
-
-void TreeWidget::displayTree() {
-    // Example Complex tree setup
-    Complex c1(1.0, 2.0);
-    Complex c2(2.0, 3.0);
-    Complex c3(3.0, 4.0);
-    Complex c4(4.0, 5.0);
-    Complex c5(5.0, 6.0);
-    Complex c6(6.0, 7.0);
-
-    Node<Complex> root_complex(c1);
-    complexTree.add_root(root_complex);
-    complexTree.add_sub_node(root_complex, Node<Complex>(c2));
-    complexTree.add_sub_node(root_complex, Node<Complex>(c3));
-    complexTree.add_sub_node(Node<Complex>(c2), Node<Complex>(c4));
-    complexTree.add_sub_node(Node<Complex>(c2), Node<Complex>(c5));
-    complexTree.add_sub_node(Node<Complex>(c3), Node<Complex>(c6));
-
-    auto rootItem = new QTreeWidgetItem(treeWidget);
-    rootItem->setText(0, QString::fromStdString(complexTree.begin_pre_order()->get_value().to_string()));
-
-    std::function<void(QTreeWidgetItem*, std::shared_ptr<Node<Complex>>)> addChildren = 
-        [&](QTreeWidgetItem *parentItem, std::shared_ptr<Node<Complex>> node) {
-        for (auto &child : node->children) {
-            auto childItem = new QTreeWidgetItem(parentItem);
-            childItem->setText(0, QString::fromStdString(child->get_value().to_string()));
-            addChildren(childItem, child);
+/**
+ * @brief Displays the tree in the GUI.
+ * @param t The tree to display.
+ */
+void TreeWidget::displayTree(const Tree<double>& t) {
+    scene->clear();
+    std::queue<std::pair<Node<double>*, int>> q;
+    q.push({t.get_root(), 0});
+    int y = 0;
+    while (!q.empty()) {
+        auto [node, x] = q.front();
+        q.pop();
+        if (node) {
+            QGraphicsTextItem* item = scene->addText(QString::number(node->get_value()));
+            item->setPos(x * 50, y * 50);
+            y++;
+            for (size_t i = 0; i < node->children.size(); ++i) {
+                q.push({node->children[i], x * 2 + i});
+            }
         }
-    };
+    }
+}
 
-    addChildren(rootItem, complexTree.find_node(complexTree.begin_pre_order().operator->(), c1));
+/**
+ * @brief Main function to run the application.
+ */
+int main(int argc, char *argv[]) {
+    QApplication a(argc, argv);
+    TreeWidget w;
+    w.show();
+    return a.exec();
 }

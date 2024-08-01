@@ -1,36 +1,27 @@
 #pragma once
 
-#include <QWidget>
-#include <QTreeWidget>
-#include "node.hpp"
+#include <QGraphicsView>
 #include "tree.hpp"
-#include "complex.hpp"
 
 /**
- * @class TreeWidget
- * @brief A Qt widget for displaying a tree structure.
+ * @brief A class to represent the GUI for displaying the k-ary tree.
  */
-class TreeWidget : public QWidget {
+class TreeWidget : public QGraphicsView {
     Q_OBJECT
 
 public:
     /**
      * @brief Constructor to initialize the TreeWidget.
-     * @param parent The parent widget.
+     * @param parent Parent widget.
      */
-    TreeWidget(QWidget *parent = nullptr);
+    TreeWidget(QWidget* parent = nullptr);
+
+    /**
+     * @brief Displays the tree in the GUI.
+     * @param t The tree to display.
+     */
+    void displayTree(const Tree<double>& t);
 
 private:
-    /**
-     * @brief Setup the user interface.
-     */
-    void setupUi();
-
-    /**
-     * @brief Display the tree structure.
-     */
-    void displayTree();
-
-    QTreeWidget *treeWidget;  ///< The QTreeWidget to display the tree.
-    Tree<Complex> complexTree;  ///< The tree of complex numbers.
+    QGraphicsScene* scene;  ///< Scene to display the tree nodes.
 };
