@@ -1,7 +1,8 @@
 #pragma once
 
 #include <vector>
-#include <map>
+#include <unordered_map>
+#include <string>
 #include <iostream>
 #include "ResourceType.hpp"
 
@@ -34,12 +35,22 @@
  * - std::vector<std::pair<int, std::pair<ResourceType, YieldType>>> getLandPlots() const: 
  *   Get the current state of the land plots on the board.
  * - void printBoard() const: Print the current state of the board.
+ * - void addPlayerSettlement(const std::string& player, int x, int y): Add a settlement for a player.
+ * - void addPlayerRoad(const std::string& player, int x, int y): Add a road for a player.
+ * - void addPlayerCity(const std::string& player, int x, int y): Add a city for a player.
+ * - std::unordered_map<std::string, std::vector<std::pair<int, int>>> getPlayerSettlements() const: Get the current player settlements.
+ * - std::unordered_map<std::string, std::vector<std::pair<int, int>>> getPlayerRoads() const: Get the current player roads.
+ * - std::unordered_map<std::string, std::vector<std::pair<int, int>>> getPlayerCities() const: Get the current player cities.
  */
 
 namespace ariel {
+
     class Board {
     private:
         std::vector<std::pair<int, std::pair<ResourceType, YieldType>>> landPlots;
+        std::unordered_map<std::string, std::vector<std::pair<int, int>>> settlements;
+        std::unordered_map<std::string, std::vector<std::pair<int, int>>> roads;
+        std::unordered_map<std::string, std::vector<std::pair<int, int>>> cities;
 
     public:
         Board();
@@ -49,7 +60,13 @@ namespace ariel {
         void setupManualBoard(const std::vector<std::pair<int, std::pair<ResourceType, YieldType>>>& manualSetup);
 
         std::vector<std::pair<int, std::pair<ResourceType, YieldType>>> getLandPlots() const;
-
         void printBoard() const;
+
+        void addPlayerSettlement(const std::string& player, int x, int y);
+        void addPlayerRoad(const std::string& player, int x, int y);
+        void addPlayerCity(const std::string& player, int x, int y);
+        std::unordered_map<std::string, std::vector<std::pair<int, int>>> getPlayerSettlements() const;
+        std::unordered_map<std::string, std::vector<std::pair<int, int>>> getPlayerRoads() const;
+        std::unordered_map<std::string, std::vector<std::pair<int, int>>> getPlayerCities() const;
     };
 }

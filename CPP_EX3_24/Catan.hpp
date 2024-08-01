@@ -21,13 +21,15 @@ namespace ariel {
         Board gameBoard; // The game board
         int currentPlayerIndex; // Index of the current player
 
+        bool canAfford(const Player& player, const std::map<ResourceType, int>& cost) const;
+
     public:
         Catan(Player& player1, Player& player2, Player& player3);
-
         Board getBoard() const;
         void ChooseStartingPlayer();
         Player& getCurrentPlayer();
         void nextTurn();
         void printWinner() const;
+        void playTurn(); // New method to handle player actions
     };
 }

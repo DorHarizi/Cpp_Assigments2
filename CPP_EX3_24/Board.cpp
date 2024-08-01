@@ -9,6 +9,41 @@ namespace ariel {
         landPlots.resize(19, {0, {ResourceType::None, YieldType::None}}); // Initialize with 19 empty plots
     }
 
+    void Board::setupManualBoard(const std::vector<std::pair<int, std::pair<ResourceType, YieldType>>>& manualSetup) {
+        if (manualSetup.size() != 19) {
+            throw std::invalid_argument("Manual setup must contain exactly 19 plots.");
+        }
+        landPlots = manualSetup;
+    }
+
+    std::vector<std::pair<int, std::pair<ResourceType, YieldType>>> Board::getLandPlots() const {
+        return landPlots;
+    }
+
+       std::unordered_map<std::string, std::vector<std::pair<int, int>>> Board::getPlayerSettlements() const {
+        return settlements;
+    }
+
+    std::unordered_map<std::string, std::vector<std::pair<int, int>>> Board::getPlayerRoads() const {
+        return roads;
+    }
+
+    std::unordered_map<std::string, std::vector<std::pair<int, int>>> Board::getPlayerCities() const {
+        return cities;
+    }
+
+    void Board::addPlayerSettlement(const std::string& player, int x, int y) {
+        settlements[player].emplace_back(x, y);
+    }
+
+    void Board::addPlayerRoad(const std::string& player, int x, int y) {
+        roads[player].emplace_back(x, y);
+    }
+
+    void Board::addPlayerCity(const std::string& player, int x, int y) {
+        cities[player].emplace_back(x, y);
+    }
+
     void Board::distributeResources() {
         std::vector<std::pair<ResourceType, YieldType>> resources = {
             {ResourceType::Forest, YieldType::wood}, {ResourceType::Forest, YieldType::wood}, 
@@ -43,23 +78,36 @@ namespace ariel {
         }
     }
 
-    void Board::setupManualBoard(const std::vector<std::pair<int, std::pair<ResourceType, YieldType>>>& manualSetup) {
-        if (manualSetup.size() != 19) {
-            throw std::invalid_argument("Manual setup must contain exactly 19 plots.");
-        }
-        landPlots = manualSetup;
-    }
-
-    std::vector<std::pair<int, std::pair<ResourceType, YieldType>>> Board::getLandPlots() const {
-        return landPlots;
-    }
-
     void Board::printBoard() const {
         std::cout << "-----------Current Board-----------" << std::endl;
         for (const auto& plot : landPlots) {
             std::cout << "Number: " << plot.first << " - Resource: " 
                       << resourceTypeToString(plot.second.first) << " (" 
                       << yieldTypeToString(plot.second.second) << ")" << std::endl;
+        }
+
+        std::cout << "-----------Player Settlements-----------" << std::endl;
+        for (const auto& player : settlements) {
+            std::cout << "Player: " << player.first << std::endl;
+            for (const auto& loc : player.second) {
+                std::cout << "  Settlement at (" << loc.first << ", " << loc.second << ")" << std::endl;
+            }
+        }
+
+        std::cout << "-----------Player Roads-----------" << std::endl;
+        for (const auto& player : roads) {
+            std::cout << "Player: " << player.first << std::endl;
+            for (const auto& loc : player.second) {
+                std::cout << "  Road at (" << loc.first << ", " << loc.second << ")" << std::endl;
+            }
+        }
+
+        std::cout << "-----------Player Cities-----------" << std::endl;
+        for (const auto& player : cities) {
+            std::cout << "Player: " << player.first << std::endl;
+            for (const auto& loc : player.second) {
+                std::cout << "  City at (" << loc.first << ", " << loc.second << ")" << std::endl;
+            }
         }
     }
 }
