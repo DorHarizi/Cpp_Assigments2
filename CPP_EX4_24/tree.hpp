@@ -5,6 +5,7 @@
 #include <stack>
 #include <queue>
 #include <iostream>
+#include <functional>
 
 /**
  * @brief A class to represent a k-ary tree.
@@ -516,6 +517,106 @@ class Tree {
                     return current;
                 }
         };
+
+        /**
+         * @brief Iterator for MinHeap traversal of the tree.
+         * 
+         * Traverses nodes in ascending order of their values using a min-heap.
+         */
+        class MinHeapIterator {
+            private:
+                std::priority_queue<Node<T>*, std::vector<Node<T>*>, std::function<bool(Node<T>*, Node<T>*)>> min_heap;
+
+                /**
+                 * @brief Helper function to initialize the min-heap with nodes.
+                 * 
+                 * Performs a pre-order traversal to add all nodes to the min-heap.
+                 * 
+                 * @param node Current node in the traversal.
+                 */
+                void initialize_min_heap(Node<T>* node) {
+                    if (node == nullptr) return;
+                    min_heap.push(node);
+                    for (Node<T>* child : node->children) {
+                        initialize_min_heap(child);
+                    }
+                }
+
+            public:
+                /**
+                 * @brief Constructor for MinHeapIterator.
+                 * 
+                 * Initializes the iterator for min-heap traversal from the root node.
+                 * 
+                 * @param root Starting node for the traversal.
+                 */
+                MinHeapIterator(Node<T>* root)
+                    : min_heap([](Node<T>* a, Node<T>* b) { return a->data > b->data; }) {
+                    initialize_min_heap(root);
+                }
+
+                /**
+                 * @brief Comparison operator to check if two iterators are different.
+                 * 
+                 * Iterators are considered different if either has nodes left to visit.
+                 * 
+                 * @param other The other iterator to compare with.
+                 * @return True if the iterators are different, false otherwise.
+                 */
+                bool operator!=(const MinHeapIterator& other) const {
+                    return !min_heap.empty() || !other.min_heap.empty();
+                }
+
+                /**
+                 * @brief Increment operator to move to the next node.
+                 * 
+                 * Moves to the next node in min-heap traversal by popping the heap.
+                 * 
+                 * @return Reference to the current iterator.
+                 */
+                MinHeapIterator& operator++() {
+                    if (!min_heap.empty()) {
+                        min_heap.pop();
+                    }
+                    return *this;
+                }
+
+                /**
+                 * @brief Dereference operator to access the current node.
+                 * 
+                 * @return Reference to the current node.
+                 */
+                Node<T>& operator*() {
+                    return *min_heap.top();
+                }
+
+                /**
+                 * @brief Arrow operator to access the current node's members.
+                 * 
+                 * @return Pointer to the current node.
+                 */
+                Node<T>* operator->() {
+                    return min_heap.top();
+                }
+        };
+        // Methods to get Min-Heap Iterator
+        /**
+         * @brief Gets an iterator for min-heap traversal of the tree.
+         * 
+         * @return An iterator for min-heap traversal starting from the root.
+         */
+        MinHeapIterator begin_min_heap() {
+            return MinHeapIterator(root);
+        }
+
+        /**
+         * @brief Gets an iterator representing the end of the min-heap traversal.
+         * 
+         * @return An iterator representing the end of min-heap traversal.
+         */
+        MinHeapIterator end_min_heap() {
+            return MinHeapIterator(nullptr);
+        }
 
         // Methods to get Pre-Order Iterator
 

@@ -69,12 +69,12 @@ int main() {
     } 
     // prints: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6
 
-    // Tree<double> minHeap = tree.myHeap();
-    // std::cout << std::endl;
-    // std::cout << "The print with the Heap Iterator: " << std::endl;
-    // for (auto node = minHeap.begin_heap_scan(); node != minHeap.end_heap_scan(); ++node) {
-    //     std::cout << node.get_value() << std::endl;
-    // } // prints: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6
+    std::cout << std::endl;
+    std::cout << "The print with the MinHeap Iterator: " << std::endl;
+    for (auto node = tree.begin_min_heap(); node != tree.end_min_heap(); ++node) {
+        std::cout << node->get_value() << std::endl;
+    } 
+    // prints: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6
 
     Tree<double, 3> three_ary_tree; // 3-ary tree.
     three_ary_tree.add_root(root_node);
@@ -132,6 +132,13 @@ int main() {
     std::cout << "The print with the Tree Order (default BFS) for Three-Ary Tree: " << std::endl;
     for (auto node : three_ary_tree) {
         std::cout << node.get_value() << std::endl;
+    } 
+    // prints: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6
+
+    std::cout << std::endl;
+    std::cout << "The print with the MinHeap Iterator for Three-Ary Tree: " << std::endl;
+    for (auto node = three_ary_tree.begin_min_heap(); node != three_ary_tree.end_min_heap(); ++node) {
+        std::cout << node->get_value() << std::endl;
     } 
     // prints: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6
 
