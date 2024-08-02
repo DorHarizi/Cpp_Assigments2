@@ -1,34 +1,20 @@
-#!make -f
+CXX = clang++
+CXXFLAGS = -std=c++11 -Werror -Wsign-conversion
 
-CXX=clang++
-CXXFLAGS=-std=c++11 -Werror -Wsign-conversion
-VALGRIND_FLAGS=-v --leak-check=full --show-leak-kinds=all --error-exitcode=99
-QTFLAGS=`pkg-config --cflags --libs Qt5Widgets`
+SOURCES = Demo.cpp
+HEADERS = tree.hpp node.hpp
+OBJECTS = $(SOURCES:.cpp=.o)
 
-SOURCES=treewidget.cpp Demo.cpp
-HEADERS=treewidget.hpp tree.hpp node.hpp
-OBJECTS=$(SOURCES:.cpp=.o)
+all: demo
 
-all: demo tree
+demo: $(OBJECTS)
+	$(CXX) $(CXXFLAGS) $(OBJECTS) -o demo
 
 run: demo
-	./$^
+	./demo
 
-demo: Demo.o tree.o node.o
-	$(CXX) $(CXXFLAGS) $^ -o demo
-
-tree: treewidget.o tree.o node.o
-	$(CXX) $(CXXFLAGS) $(QTFLAGS) $^ -o tree
-
-tidy:
-	clang-tidy $(SOURCES) $(HEADERS) -checks=bugprone-,clang-analyzer-,cppcoreguidelines-,performance-,portability-,readability-,-cppcoreguidelines-pro-bounds-pointer-arithmetic,-cppcoreguidelines-owning-memory --warnings-as-errors=-* --
-
-valgrind: demo tree
-	valgrind --tool=memcheck $(VALGRIND_FLAGS) ./demo 2>&1 | { egrep "lost| at " || true; }
-	valgrind --tool=memcheck $(VALGRIND_FLAGS) ./tree 2>&1 | { egrep "lost| at " || true; }
-
-%.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+valgrind: demo
+	valgrind --tool=memcheck -v --leak-check=full --show-leak-kinds=all --error-exitcode=99 ./demo
 
 clean:
-	rm -f *.o demo tree
+	rm -f $(OBJECTS) demo
