@@ -69,6 +69,13 @@ int main() {
     } 
     // prints: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6
 
+    // Tree<double> minHeap = tree.myHeap();
+    // std::cout << std::endl;
+    // std::cout << "The print with the Heap Iterator: " << std::endl;
+    // for (auto node = minHeap.begin_heap_scan(); node != minHeap.end_heap_scan(); ++node) {
+    //     std::cout << node.get_value() << std::endl;
+    // } // prints: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6
+
     Tree<double, 3> three_ary_tree; // 3-ary tree.
     three_ary_tree.add_root(root_node);
     three_ary_tree.add_sub_node(root_node, n1);
@@ -88,21 +95,21 @@ int main() {
 
     std::cout << std::endl;
     std::cout << "The print with the Pre-order Iterator for Three-Ary Tree: " << std::endl;
-    for (auto node = three_ary_tree.begin_pre_order(); node != three_ary_tree.end_pre_order(); ++node) {
+    for (auto node = three_ary_tree.begin_pre_order_non_binary(); node != three_ary_tree.end_pre_order_non_binary(); ++node) {
         std::cout << node->get_value() << std::endl;
     } 
     // prints: 1.1, 1.2, 1.5, 1.3, 1.6, 1.4
 
     std::cout << std::endl;
     std::cout << "The print with the Post-order Iterator for Three-Ary Tree: " << std::endl;
-    for (auto node = three_ary_tree.begin_post_order(); node != three_ary_tree.end_post_order(); ++node) {
+    for (auto node = three_ary_tree.begin_post_order_non_binary(); node != three_ary_tree.end_post_order_non_binary(); ++node) {
         std::cout << node->get_value() << std::endl;
     } 
     // prints: 1.5, 1.2, 1.6, 1.3, 1.4, 1.1
 
     std::cout << std::endl;
     std::cout << "The print with the In-order Iterator for Three-Ary Tree: " << std::endl;
-    for (auto node = three_ary_tree.begin_in_order(); node != three_ary_tree.end_in_order(); ++node) {
+    for (auto node = three_ary_tree.begin_in_order_non_binary(); node != three_ary_tree.end_in_order_non_binary(); ++node) {
         std::cout << node->get_value() << std::endl;
     } 
     // prints: 1.5, 1.2, 1.1, 1.6, 1.3, 1.4

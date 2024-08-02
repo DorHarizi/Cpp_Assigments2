@@ -517,7 +517,6 @@ class Tree {
                 }
         };
 
-
         // Methods to get Pre-Order Iterator
 
         /**
@@ -536,6 +535,24 @@ class Tree {
          */
         PreOrderIterator end_pre_order() {
             return PreOrderIterator(nullptr);
+        }
+
+        /**
+         * @brief Gets an iterator for pre-order traversal of the tree for non-binary case.
+         * 
+         * @return An iterator for DFS traversal starting from the root.
+         */
+        DFSIterator begin_pre_order_non_binary() {
+            return DFSIterator(root);
+        }
+
+        /**
+         * @brief Gets an iterator representing the end of the pre-order traversal for non-binary case.
+         * 
+         * @return An iterator representing the end of DFS traversal.
+         */
+        DFSIterator end_pre_order_non_binary() {
+            return DFSIterator(nullptr);
         }
 
         // Methods to get Post-Order Iterator
@@ -558,6 +575,24 @@ class Tree {
             return PostOrderIterator(nullptr);
         }
 
+        /**
+         * @brief Gets an iterator for post-order traversal of the tree for non-binary case.
+         * 
+         * @return An iterator for DFS traversal starting from the root.
+         */
+        DFSIterator begin_post_order_non_binary() {
+            return DFSIterator(root);
+        }
+
+        /**
+         * @brief Gets an iterator representing the end of the post-order traversal for non-binary case.
+         * 
+         * @return An iterator representing the end of DFS traversal.
+         */
+        DFSIterator end_post_order_non_binary() {
+            return DFSIterator(nullptr);
+        }
+
         // Methods to get In-Order Iterator
 
         /**
@@ -577,6 +612,25 @@ class Tree {
         InOrderIterator end_in_order() {
             return InOrderIterator(nullptr);
         }
+
+        /**
+         * @brief Gets an iterator for in-order traversal of the tree for non-binary case.
+         * 
+         * @return An iterator for DFS traversal starting from the root.
+         */
+        DFSIterator begin_in_order_non_binary() {
+            return DFSIterator(root);
+        }
+
+        /**
+         * @brief Gets an iterator representing the end of the in-order traversal for non-binary case.
+         * 
+         * @return An iterator representing the end of DFS traversal.
+         */
+        DFSIterator end_in_order_non_binary() {
+            return DFSIterator(nullptr);
+        }
+
 
         // Methods to get BFS Iterator
 
