@@ -2,6 +2,7 @@
 #include "node.hpp"
 #include "tree.hpp"
 
+
 int main() {
     Node<double> root_node(1.1);
     Tree<double> tree; // Binary tree that contains doubles.
@@ -141,6 +142,33 @@ int main() {
         std::cout << node->get_value() << std::endl;
     } 
     // prints: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6
+
+    Complex c1(1.0, 2.0);
+    Complex c2(3.0, 4.0);
+    Complex c3(5.0, 6.0);
+    Complex c4(7.0, 8.0);
+
+    // Create nodes with complex numbers
+    Node<Complex> node1(c1);
+    Node<Complex> node2(c2);
+    Node<Complex> node3(c3);
+    Node<Complex> node4(c4);
+
+    // Create the tree and add nodes
+    Tree<Complex> tree1;
+    tree1.add_root(node1);
+    tree1.add_sub_node(node1, node2);
+    tree1.add_sub_node(node1, node3);
+    tree1.add_sub_node(node2, node4);
+
+    // Traverse the tree1
+    std::cout << std::endl;
+    std::cout << "The print for tree1 Tree: " << std::endl;
+    for (auto node : tree1) {
+        Complex tmp = node.get_value();
+        std::cout << tmp.to_string() << std::endl;
+    } 
+    // prints: 1+2i, 3+4i, 5+6i, 7+8i
 
     // cout << tree; // Should print the graph using GUI.
     // cout << three_ary_tree; // Should print the graph using GUI.

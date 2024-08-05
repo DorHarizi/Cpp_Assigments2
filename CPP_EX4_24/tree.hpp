@@ -6,6 +6,131 @@
 #include <queue>
 #include <iostream>
 #include <functional>
+#include <string>
+#include <sstream>
+
+
+/**
+ * @brief A class to represent complex numbers.
+ * 
+ * This class provides basic arithmetic operations for complex numbers, including
+ * addition, subtraction, multiplication, and division. It also includes comparison
+ * operators and methods to get the real and imaginary parts of the complex number.
+ */
+class Complex {
+    private:
+        double real;  ///< Real part of the complex number
+        double imag;  ///< Imaginary part of the complex number
+
+    public:
+        /**
+         * @brief Constructor to initialize a complex number with given real and imaginary parts.
+         * 
+         * @param r Real part of the complex number (default is 0.0)
+         * @param i Imaginary part of the complex number (default is 0.0)
+         */
+        Complex(double r = 0.0, double i = 0.0) : real(r), imag(i) {}
+
+        /**
+         * @brief Get the real part of the complex number.
+         * 
+         * @return Real part of the complex number.
+         */
+        double get_real() const { return real; }
+
+        /**
+         * @brief Get the imaginary part of the complex number.
+         * 
+         * @return Imaginary part of the complex number.
+         */
+        double get_imag() const { return imag; }
+
+        /**
+         * @brief Add two complex numbers.
+         * 
+         * @param other The complex number to add.
+         * @return The result of the addition as a new complex number.
+         */
+        Complex operator+(const Complex& other) const {
+            return Complex(real + other.real, imag + other.imag);
+        }
+
+        /**
+         * @brief Subtract one complex number from another.
+         * 
+         * @param other The complex number to subtract.
+         * @return The result of the subtraction as a new complex number.
+         */
+        Complex operator-(const Complex& other) const {
+            return Complex(real - other.real, imag - other.imag);
+        }
+
+        /**
+         * @brief Multiply two complex numbers.
+         * 
+         * @param other The complex number to multiply with.
+         * @return The result of the multiplication as a new complex number.
+         */
+        Complex operator*(const Complex& other) const {
+            return Complex(real * other.real - imag * other.imag,
+                        real * other.imag + imag * other.real);
+        }
+
+        /**
+         * @brief Divide one complex number by another.
+         * 
+         * @param other The complex number to divide by.
+         * @return The result of the division as a new complex number.
+         */
+        Complex operator/(const Complex& other) const {
+            double denominator = other.real * other.real + other.imag * other.imag;
+            return Complex((real * other.real + imag * other.imag) / denominator,
+                        (imag * other.real - real * other.imag) / denominator);
+        }
+
+        /**
+         * @brief Check if two complex numbers are equal.
+         * 
+         * @param other The complex number to compare with.
+         * @return True if the complex numbers are equal, false otherwise.
+         */
+        bool operator==(const Complex& other) const {
+            return real == other.real && imag == other.imag;
+        }
+
+        /**
+         * @brief Check if one complex number is greater than another.
+         * 
+         * @param other The complex number to compare with.
+         * @return True if this complex number is greater, false otherwise.
+         */
+        bool operator>(const Complex& other) const {
+            return real > other.real || (real == other.real && imag > other.imag);
+        }
+
+        /**
+         * @brief Check if one complex number is less than another.
+         * 
+         * @param other The complex number to compare with.
+         * @return True if this complex number is less, false otherwise.
+         */
+        bool operator<(const Complex& other) const {
+            return real < other.real || (real == other.real && imag < other.imag);
+        }
+
+        /**
+         * @brief Convert the complex number to a string representation.
+         * 
+         * @return String representation of the complex number.
+         */
+        std::string to_string() const {
+            std::ostringstream oss;
+            oss << real;
+            if (imag >= 0) oss << "+";
+            oss << imag << "i";
+            return oss.str();
+        }
+};
 
 /**
  * @brief A class to represent a k-ary tree.
@@ -599,7 +724,9 @@ class Tree {
                     return min_heap.top();
                 }
         };
+
         // Methods to get Min-Heap Iterator
+
         /**
          * @brief Gets an iterator for min-heap traversal of the tree.
          * 
