@@ -8,6 +8,9 @@
 #include <functional>
 #include <string>
 #include <sstream>
+#include <SFML/Graphics.hpp>
+#include <iomanip>
+
 
 
 /**
@@ -176,6 +179,10 @@ class Tree {
          */
         ~Tree() {
             delete_tree(root);
+        }
+
+        Node<T>* getRoot() const {
+            return root;
         }
 
         /**
@@ -920,3 +927,83 @@ class Tree {
             return BFSIterator(nullptr);
         }
 };
+
+
+
+
+
+template <typename T>
+void drawTree(sf::RenderWindow& window, Node<T>* node, float x, float y, float xOffset, int depth, sf::Font& font) {
+    if (node == nullptr)
+        return;
+
+    // Draw the node (circle)
+    sf::CircleShape circle(20);
+    circle.setFillColor(sf::Color::Green);
+    circle.setPosition(x, y);
+    window.draw(circle);
+
+    // Draw the node value (text)
+    sf::Text text;
+    text.setFont(font);
+    std::ostringstream oss;
+    oss << std::fixed << std::setprecision(1) << node->data; // Set precision to 1 decimal place
+    text.setString(oss.str());
+    text.setCharacterSize(14);
+    text.setFillColor(sf::Color::White);
+    text.setPosition(x + 10, y + 5);
+    window.draw(text);
+
+    // Draw connections and recursively draw children
+    float childXOffset = xOffset / 2;
+    float childY = y + 100;
+    for (std::size_t i = 0; i < node->children.size(); ++i) {
+        float childX = x - xOffset + (2 * xOffset * i / (node->children.size() - 1));
+        if (node->children.size() == 1) {
+            childX = x;
+        }
+        // Draw line
+        sf::Vertex line[] = {
+            sf::Vertex(sf::Vector2f(x + 20, y + 20)),
+            sf::Vertex(sf::Vector2f(childX + 20, childY))
+        };
+        window.draw(line, 2, sf::Lines);
+
+        drawTree(window, node->children[i], childX, childY, childXOffset, depth + 1, font);
+    }
+}
+
+
+
+template <typename T, int K>
+std::ostream& operator<<(std::ostream& os, const Tree<T, K>& tree) {
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Tree Visualization");
+
+    sf::Font font;
+    if (!font.loadFromFile("font.ttf")) {  // Make sure the file exists in your project directory
+        std::cerr << "Failed to load font!" << std::endl;
+        return os;
+    }
+
+    while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+
+        window.clear();
+        drawTree(window, tree.getRoot(), 400, 50, 200, 0, font);
+        window.display();
+    }
+
+    return os;
+}
+
+
+
+
+
+
+
+

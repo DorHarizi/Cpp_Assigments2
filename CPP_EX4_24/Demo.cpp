@@ -170,8 +170,9 @@ int main() {
     } 
     // prints: 1+2i, 3+4i, 5+6i, 7+8i
 
-    // cout << tree; // Should print the graph using GUI.
-    // cout << three_ary_tree; // Should print the graph using GUI.
+    std::cout << tree; // Should print the graph using GUI.
+    std::cout << three_ary_tree; // Should print the graph using GUI.
+    // std::cout << tree1;
 
 
     return 0;

@@ -1,4 +1,5 @@
 {
     "C_Cpp.default.compilerPath": "\\\\wsl.localhost\\Ubuntu\\usr\\share\\lintian\\overrides\\clang-14",
-    "workbench.editor.enablePreview": false
+    "workbench.editor.enablePreview": false,
+    "C_Cpp.errorSquiggles": "enabled"
 }
