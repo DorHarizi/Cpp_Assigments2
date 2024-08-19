@@ -928,10 +928,6 @@ class Tree {
         }
 };
 
-
-
-
-
 template <typename T>
 void drawTree(sf::RenderWindow& window, Node<T>* node, float x, float y, float xOffset, int depth, sf::Font& font) {
     if (node == nullptr)
